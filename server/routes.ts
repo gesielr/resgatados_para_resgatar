@@ -4,13 +4,11 @@ import { storage } from "./storage";
 import Stripe from "stripe";
 import { partnerFormSchema, contactFormSchema } from "@shared/schema";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-11-20.acacia",
-});
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2024-11-20.acacia",
+    })
+  : null;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -56,6 +54,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Stripe payment intent endpoint for one-time donations
   app.post("/api/create-payment-intent", async (req, res) => {
+    if (!stripe) {
+      return res.status(503).json({ 
+        message: "Pagamento com cartão temporariamente indisponível. Por favor, utilize a opção PIX." 
+      });
+    }
+
     try {
       const { amount } = req.body;
       

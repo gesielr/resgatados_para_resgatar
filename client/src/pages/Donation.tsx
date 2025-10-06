@@ -13,10 +13,9 @@ import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+  : null;
 
 function CheckoutForm({ amount, frequency }: { amount: number; frequency: string }) {
   const stripe = useStripe();
@@ -69,18 +68,51 @@ function CheckoutForm({ amount, frequency }: { amount: number; frequency: string
 function StripeCheckout({ amount, frequency }: { amount: number; frequency: string }) {
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    if (!stripePromise) {
+      setLoading(false);
+      setError(true);
+      return;
+    }
+
+    setLoading(true);
+    setError(false);
+
     apiRequest("POST", "/api/create-payment-intent", { amount })
-      .then((res) => res.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
+      .then(async (res) => {
+        if (!res.ok) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
+        const data = await res.json();
+        if (data.clientSecret) {
+          setClientSecret(data.clientSecret);
+        } else {
+          setError(true);
+        }
         setLoading(false);
       })
       .catch(() => {
+        setError(true);
         setLoading(false);
       });
   }, [amount]);
+
+  if (!stripePromise || error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-muted-foreground mb-4">
+          Pagamento com cartão temporariamente indisponível.
+        </p>
+        <p className="text-muted-foreground">
+          Por favor, utilize a opção PIX para doar.
+        </p>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -92,8 +124,13 @@ function StripeCheckout({ amount, frequency }: { amount: number; frequency: stri
 
   if (!clientSecret) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
-        Erro ao carregar formulário de pagamento
+      <div className="text-center py-12">
+        <p className="text-muted-foreground mb-4">
+          Pagamento com cartão temporariamente indisponível.
+        </p>
+        <p className="text-muted-foreground">
+          Por favor, utilize a opção PIX para doar.
+        </p>
       </div>
     );
   }

@@ -52,17 +52,17 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4 text-gold" data-testid="text-footer-links">Links Rápidos</h3>
             <div className="space-y-2 text-sm">
-              <Link href="/sobre">
-                <a className="block hover:text-gold transition-colors" data-testid="link-footer-sobre">Sobre Nós</a>
+              <Link href="/sobre" className="block hover:text-gold transition-colors" data-testid="link-footer-sobre">
+                Sobre Nós
               </Link>
-              <Link href="/trabalhos">
-                <a className="block hover:text-gold transition-colors" data-testid="link-footer-trabalhos">Trabalhos Realizados</a>
+              <Link href="/trabalhos" className="block hover:text-gold transition-colors" data-testid="link-footer-trabalhos">
+                Trabalhos Realizados
               </Link>
-              <Link href="/parceiros">
-                <a className="block hover:text-gold transition-colors" data-testid="link-footer-parceiros">Parceiros</a>
+              <Link href="/parceiros" className="block hover:text-gold transition-colors" data-testid="link-footer-parceiros">
+                Parceiros
               </Link>
-              <Link href="/contribuir">
-                <a className="block hover:text-gold transition-colors" data-testid="link-footer-contribuir">Contribuir</a>
+              <Link href="/contribuir" className="block hover:text-gold transition-colors" data-testid="link-footer-contribuir">
+                Contribuir
               </Link>
             </div>
           </div>
