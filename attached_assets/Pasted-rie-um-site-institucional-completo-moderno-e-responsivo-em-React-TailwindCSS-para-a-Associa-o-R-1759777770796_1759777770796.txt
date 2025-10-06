@@ -1,0 +1,121 @@
+rie um site institucional completo, moderno e responsivo em React + TailwindCSS, para a Associação Resgatados para Resgatar, uma entidade cristã sem fins lucrativos com sede em Garopaba-SC, dedicada a resgatar pessoas em situação de rua e encaminhá-las para centros terapêuticos.
+
+🏛️ Identidade
+
+Nome da instituição: Associação Resgatados para Resgatar
+
+Cores base: azul escuro (#1E3A8A), branco e dourado suave (#D4AF37)
+
+Fonte: Inter ou Poppins
+
+Logo (use um placeholder com uma cruz estilizada e o nome ao lado)
+
+🧩 Estrutura do site
+
+1. Página Inicial (/):
+
+Banner de abertura com foto de fundo (resgate/acolhimento)
+
+Frase principal: “Resgatando vidas com fé, amor e propósito.”
+
+Botões de destaque: “Seja um Parceiro” e “Contribuir Agora”
+
+Sessão “Quem Somos” com resumo da missão
+
+Sessão “Últimos Trabalhos” com cards de projetos e resgates
+
+Sessão “Depoimentos” (testemunhos de transformações)
+
+Rodapé com contatos e redes sociais
+
+2. Sobre Nós (/sobre):
+
+Texto institucional (missão, visão, valores)
+
+Seção de fotos da equipe
+
+Link para visualizar o Estatuto (.pdf)
+
+3. Trabalhos Realizados (/trabalhos):
+
+Grid de cards com fotos e descrições de resgates, eventos e campanhas
+
+Cada card abre um modal com mais informações
+
+Filtro por tipo (Resgates, Cultos, Parcerias, Ações Comunitárias)
+
+4. Parceiros (/parceiros):
+
+Lista com logos e descrições de parceiros e apoiadores (igrejas, empresas, CTs)
+
+Seção “Seja um Parceiro” com formulário simples (nome, e-mail, telefone, mensagem)
+
+Envio de formulário para o e-mail oficial da associação via API (use EmailJS ou Supabase Functions)
+
+5. Contribuição (/contribuir):
+
+Texto inspirador: “Sua ajuda transforma vidas.”
+
+Botão para doar via Pix (chave) e botão para doar via cartão (Stripe ou Pagar.me)
+
+Área de doações recorrentes (mensal, trimestral, anual)
+
+QR Code do Pix (placeholder)
+
+6. Contato (/contato):
+
+Endereço completo da sede
+
+Telefone, e-mail e botão “Fale Conosco via WhatsApp”
+
+Mapa integrado (Google Maps iframe)
+
+💻 Funcionalidades técnicas
+
+Crie o site usando React + Vite + TailwindCSS
+
+Estrutura de pastas:
+
+src/
+├── assets/ (imagens e logo)
+├── components/ (Navbar, Footer, Hero, Form, Card, etc.)
+├── pages/
+│   ├── Home.jsx
+│   ├── Sobre.jsx
+│   ├── Trabalhos.jsx
+│   ├── Parceiros.jsx
+│   ├── Contribuir.jsx
+│   └── Contato.jsx
+├── App.jsx
+└── main.jsx
+
+
+Use React Router DOM para navegação.
+
+Navbar com logotipo e menu fixo no topo.
+
+Footer com endereço e links.
+
+Responsividade total (mobile, tablet e desktop).
+
+Use animações suaves (Framer Motion).
+
+Ícones da biblioteca Lucide React.
+
+📦 Extras
+
+Adicione um botão “Voltar ao topo” no rodapé.
+
+Inclua favicon e título da página.
+
+Otimize o SEO (metatags com nome e missão da associação).
+
+Adicione campo para newsletter (Mailchimp ou Supabase).
+
+Gere um arquivo .env.example com as variáveis de ambiente (chave PIX, STRIPE_KEY, EMAILJS_KEY, etc.).
+
+🎯 Objetivo final
+
+Gerar um projeto React completo e funcional, pronto para deploy no Vercel ou Netlify, com todas as páginas configuradas, rotas funcionando, conteúdo fictício e estrutura para substituir por textos reais depois.
+
+O resultado esperado é um site bonito, leve, espiritual e social, que comunique esperança e credibilidade, permitindo à Associação Resgatados para Resgatar mostrar seus trabalhos e captar apoio financeiro e voluntário.
