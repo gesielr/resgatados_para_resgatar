@@ -24,6 +24,15 @@ export const donationSchema = z.object({
   paymentMethod: z.enum(["pix", "card"]),
 });
 
+export interface InsertUser {
+  username: string;
+  password: string;
+}
+
+export interface User extends InsertUser {
+  id: string;
+}
+
 export type PartnerForm = z.infer<typeof partnerFormSchema>;
 export type ContactForm = z.infer<typeof contactFormSchema>;
 export type NewsletterForm = z.infer<typeof newsletterSchema>;
