@@ -25,6 +25,12 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    # ===============================================================
+    # LINHAS ADICIONADAS PARA CORRIGIR O ERRO DE AMBIENTE
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # ===============================================================
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,20 +39,16 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          # CORRIGIDO: Agora procura o package-lock.json na raiz do projeto
           cache-dependency-path: ./package-lock.json
       - name: Install dependencies
-        # CORRIGIDO: Roda o comando na raiz (removido o 'working-directory')
         run: npm install
       - name: Build
-        # CORRIGIDO: Roda o comando na raiz (removido o 'working-directory')
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # CORRIGIDO: Procura a pasta 'dist' na raiz do projeto
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
