@@ -4,6 +4,8 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  // ADICIONAMOS ESTA LINHA:
+  base: "/resgatados_para_resgatar/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
