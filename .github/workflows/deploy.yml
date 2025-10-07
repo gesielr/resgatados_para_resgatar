@@ -33,20 +33,21 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: client/package-lock.json
+          # CORRIGIDO: Agora procura o package-lock.json na raiz do projeto
+          cache-dependency-path: ./package-lock.json
       - name: Install dependencies
+        # CORRIGIDO: Roda o comando na raiz (removido o 'working-directory')
         run: npm install
-        working-directory: ./client
       - name: Build
+        # CORRIGIDO: Roda o comando na raiz (removido o 'working-directory')
         run: npm run build
-        working-directory: ./client
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload a pasta 'dist' que está dentro da pasta 'client'
-          path: './client/dist'
+          # CORRIGIDO: Procura a pasta 'dist' na raiz do projeto
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
